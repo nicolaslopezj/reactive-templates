@@ -3,7 +3,7 @@ Reactive Templates
 
 Set templates and override them in a reactive way.
 
-This allows meteor package developers to make their templates overridable.
+This allows meteor package authors to make their templates overridable.
 
 More specifically, what this packages does is that allows you to create a "imaginary template" where you can set helpers, events, etc. then, you can assign that "imaginary template" to a "real template" and all the helpers, events, etc. will be assigned to that "real template"
 
