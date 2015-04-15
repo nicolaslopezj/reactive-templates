@@ -20,7 +20,8 @@ ReactiveTemplates.request('contactForm', 'basicForm') // Basic form is the name 
 
 ReactiveTemplates.events('contactForm', {
   'click .send': function() {
-    sendMessage()
+    var message = this.$('textarea').val();
+    sendMessage(message);
   }
 })
 ```
