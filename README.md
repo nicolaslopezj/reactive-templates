@@ -7,6 +7,51 @@ This allows meteor package developers to make their templates overridable.
 
 More specifically, what this packages does is that allows you to create a "imaginary template" where you can set helpers, events, etc. then, you can assign that "imaginary template" to a "real template" and all the helpers, events, etc. will be assigned to that "real template"
 
+## Example
+
+Nothing explains better than an example, so before everything, here is an example.
+
+Let's say we have a package that provides a contact form. We want include a basic template, but we wan't to make it easy to override without loosing helpers and events.
+
+The first thing we will do is to request a template and set events.
+
+```js
+ReactiveTemplates.request('contactForm', 'basicForm') // Basic form is the name of the default template we will create later
+
+ReactiveTemplates.events('contactForm', {
+  'click .send': function() {
+    sendMessage()
+  }
+})
+```
+
+Then, we will create out default template (this is not necesary, but in most cases the developer will use it).
+
+```html
+<template name="basicForm">
+  <textarea name="message"></textarea>
+  <button class="send">Send</button>
+</template>
+```
+
+Now, we are ready to ship out package. Maybe the developer using the package uses bootstrap, so he will override the template, without loosing the events we defined. So, he will create the template.
+
+```html
+<template name="bootstrapForm">
+  <textarea class="form-control" name="message"></textarea>
+  <button class="send btn btn-primary"></button>
+</template>
+```
+
+And assing it to the request.
+
+```js
+ReactiveTemplates.set('contactForm', 'bootstrapForm')
+```
+
+Now when we call ```ReactiveTemplates.get('contactForm')``` it will return ```bootstrapForm``` instead of ```basicForm``` and the template ```bootstrapForm``` will have the events we defined to our ```basicForm``` template.
+
+
 ## Getting Started
 
 #### Request templates
@@ -90,8 +135,16 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 - ```identifier``` String. The identifier of the template request.
 - ```onDestroyed``` Function. onDestroyed hook.
 
+## Helpers
 
+#### Render template
 
+To render a reactive template directly from the template without using javascript use this
 
+```html
+<template name="myTemplate">
+  {{> reactiveTemplate template=requestIdentifier }}
+</template>
+```
 
-
+Where ```requestIdentifier``` is the identifier of the template request.
