@@ -1,66 +1,49 @@
 /**
- * Set helpers to a template that maybe it doensn't exists yet
+ * To assign a property to a template
  */
-ReactiveTemplates.helpers = function(identifier, helpers) {
+ReactiveTemplates.assignProperty = function(property, identifier, data) {
   var self = this;
   Tracker.autorun(function () {
     var template = self.get(identifier);
     if (Blaze.isTemplate(Template[template])) {
-      Template[template].helpers(helpers);
+      Template[template][property](data);
     }
   });
+}
+
+/**
+ * Set helpers to a template that maybe it doensn't exists yet
+ */
+ReactiveTemplates.helpers = function(identifier, helpers) {
+  ReactiveTemplates.assignProperty('helpers', identifier, helpers);
 }
 
 /**
  * Set events to a template that maybe it doensn't exists yet
  */
 ReactiveTemplates.events = function(identifier, events) {
-  var self = this;
-  Tracker.autorun(function () {
-    var template = self.get(identifier);
-    if (Blaze.isTemplate(Template[template])) {
-      Template[template].events(events);
-    }
-  });
+  ReactiveTemplates.assignProperty('events', identifier, events);
 }
 
 /**
  * Set onRendered to a template that maybe it doensn't exists yet
  */
 ReactiveTemplates.onRendered = function(identifier, onRendered) {
-  var self = this;
-  Tracker.autorun(function () {
-    var template = self.get(identifier);
-    if (Blaze.isTemplate(Template[template])) {
-      Template[template].onRendered(onRendered);
-    }
-  });
+  ReactiveTemplates.assignProperty('onRendered', identifier, onRendered);
 }
 
 /**
  * Set onCreated to a template that maybe it doensn't exists yet
  */
 ReactiveTemplates.onCreated = function(identifier, onCreated) {
-  var self = this;
-  Tracker.autorun(function () {
-    var template = self.get(identifier);
-    if (Blaze.isTemplate(Template[template])) {
-      Template[template].onCreated(onCreated);
-    }
-  });
+  ReactiveTemplates.assignProperty('onCreated', identifier, onCreated);
 }
 
 /**
  * Set onDestroyed to a template that maybe it doensn't exists yet
  */
 ReactiveTemplates.onDestroyed = function(identifier, onDestroyed) {
-  var self = this;
-  Tracker.autorun(function () {
-    var template = self.get(identifier);
-    if (Blaze.isTemplate(Template[template])) {
-      Template[template].onDestroyed(onDestroyed);
-    }
-  });
+  ReactiveTemplates.assignProperty('onDestroyed', identifier, onDestroyed);
 }
 
 Template.reactiveTemplate.helpers({

@@ -101,7 +101,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set helpers
 
 ```js
-  ReactiveTemplates.helpers(identifier, helpers)
+ReactiveTemplates.helpers(identifier, helpers)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -110,7 +110,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set events
 
 ```js
-  ReactiveTemplates.events(identifier, events)
+ReactiveTemplates.events(identifier, events)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -119,7 +119,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onRendered
 
 ```js
-  ReactiveTemplates.onRendered(identifier, onRendered)
+ReactiveTemplates.onRendered(identifier, onRendered)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -128,7 +128,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onCreated
 
 ```js
-  ReactiveTemplates.onCreated(identifier, onCreated)
+ReactiveTemplates.onCreated(identifier, onCreated)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -137,11 +137,30 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onDestroyed
 
 ```js
-  ReactiveTemplates.onDestroyed(identifier, onDestroyed)
+ReactiveTemplates.onDestroyed(identifier, onDestroyed)
 ```
 
 - ```identifier``` String. The identifier of the template request.
 - ```onDestroyed``` Function. onDestroyed hook.
+
+#### Set another property
+
+If you use a package like manuel:viewmodel that adds another properties to 
+templates you can call a generic method to set that property.
+
+```js
+ReactiveTemplates.assignProperty(property, identifier, data)
+```
+
+- ```property``` String. The name of the property, example "viewmodel".
+- ```identifier``` String. The identifier of the template request.
+- ```onDestroyed``` Function. onDestroyed hook.
+
+Calling this method will traduce in
+
+```js
+Template.myTemplate.property(data);
+```
 
 ## Helpers
 
