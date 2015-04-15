@@ -6,29 +6,29 @@ ReactiveTemplates = {
 /**
  * We will save all the templates that any component need
  */
-ReactiveTemplates.request = function(name, defaultTemplate) {
-  check(name, String);
+ReactiveTemplates.request = function(identifier, defaultTemplate) {
+  check(identifier, String);
   check(defaultTemplate, Match.Optional(String));
-  this._deps[name] = new Tracker.Dependency;
-  this._templates[name] = defaultTemplate;
+  this._deps[identifier] = new Tracker.Dependency;
+  this._templates[identifier] = defaultTemplate;
 }
 
 /**
- * Reactively returns the name of the template
+ * Reactively returns the identifier of the template
  */
-ReactiveTemplates.get = function(name) {
-  if (!_.has(this._deps, name)) throw 'Template "' + name + '" is not requested';
-  this._deps[name].depend();
-  return this._templates[name];
+ReactiveTemplates.get = function(identifier) {
+  if (!_.has(this._deps, identifier)) throw 'Template "' + identifier + '" is not requested';
+  this._deps[identifier].depend();
+  return this._templates[identifier];
 }
 
 /**
  * Assings a template to a template request
  */
-ReactiveTemplates.set = function(requestedName, templateName) {
-  if (!_.has(this._deps, requestedName)) throw 'Template "' + requestedName + '" is not requested';
-  this._templates[requestedName] = templateName;
-  this._deps[requestedName].changed();
+ReactiveTemplates.set = function(identifier, templateName) {
+  if (!_.has(this._deps, identifier)) throw 'Template "' + identifier + '" is not requested';
+  this._templates[identifier] = templateName;
+  this._deps[identifier].changed();
 }
 
 if (Meteor.isClient) {
@@ -36,10 +36,10 @@ if (Meteor.isClient) {
   /**
    * Set helpers to a template that maybe it doensn't exists yet
    */
-  ReactiveTemplates.setHelpers = function(templateName, helpers) {
+  ReactiveTemplates.helpers = function(identifier, helpers) {
     var self = this;
     Tracker.autorun(function () {
-      var template = self.get(templateName);
+      var template = self.get(identifier);
       if (Blaze.isTemplate(Template[template])) {
         Template[template].helpers(helpers);
       }
@@ -49,10 +49,10 @@ if (Meteor.isClient) {
   /**
    * Set events to a template that maybe it doensn't exists yet
    */
-  ReactiveTemplates.setEvents = function(templateName, events) {
+  ReactiveTemplates.events = function(identifier, events) {
     var self = this;
     Tracker.autorun(function () {
-      var template = self.get(templateName);
+      var template = self.get(identifier);
       if (Blaze.isTemplate(Template[template])) {
         Template[template].events(events);
       }
@@ -62,10 +62,10 @@ if (Meteor.isClient) {
   /**
    * Set onRendered to a template that maybe it doensn't exists yet
    */
-  ReactiveTemplates.setOnRendered = function(templateName, onRendered) {
+  ReactiveTemplates.onRendered = function(identifier, onRendered) {
     var self = this;
     Tracker.autorun(function () {
-      var template = self.get(templateName);
+      var template = self.get(identifier);
       if (Blaze.isTemplate(Template[template])) {
         Template[template].onRendered(onRendered);
       }
@@ -75,10 +75,10 @@ if (Meteor.isClient) {
   /**
    * Set onCreated to a template that maybe it doensn't exists yet
    */
-  ReactiveTemplates.setOnCreated = function(templateName, onCreated) {
+  ReactiveTemplates.onCreated = function(identifier, onCreated) {
     var self = this;
     Tracker.autorun(function () {
-      var template = self.get(templateName);
+      var template = self.get(identifier);
       if (Blaze.isTemplate(Template[template])) {
         Template[template].onCreated(onCreated);
       }
@@ -88,10 +88,10 @@ if (Meteor.isClient) {
   /**
    * Set onDestroyed to a template that maybe it doensn't exists yet
    */
-  ReactiveTemplates.setOnDestroyed = function(templateName, onDestroyed) {
+  ReactiveTemplates.onDestroyed = function(identifier, onDestroyed) {
     var self = this;
     Tracker.autorun(function () {
-      var template = self.get(templateName);
+      var template = self.get(identifier);
       if (Blaze.isTemplate(Template[template])) {
         Template[template].onDestroyed(onDestroyed);
       }
