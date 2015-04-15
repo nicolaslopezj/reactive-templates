@@ -48,7 +48,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set helpers
 
 ```js
-  ReactiveTemplates.setHelpers(identifier, helpers)
+  ReactiveTemplates.helpers(identifier, helpers)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -57,7 +57,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set events
 
 ```js
-  ReactiveTemplates.setEvents(identifier, events)
+  ReactiveTemplates.events(identifier, events)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -66,7 +66,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onRendered
 
 ```js
-  ReactiveTemplates.setOnRendered(identifier, onRendered)
+  ReactiveTemplates.onRendered(identifier, onRendered)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -75,7 +75,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onCreated
 
 ```js
-  ReactiveTemplates.setOnCreated(identifier, onCreated)
+  ReactiveTemplates.onCreated(identifier, onCreated)
 ```
 
 - ```identifier``` String. The identifier of the template request.
@@ -84,7 +84,7 @@ Setting helpers, events, etc. works really similar to meteor default way, the ma
 #### Set onDestroyed
 
 ```js
-  ReactiveTemplates.setOnDestroyed(identifier, onDestroyed)
+  ReactiveTemplates.onDestroyed(identifier, onDestroyed)
 ```
 
 - ```identifier``` String. The identifier of the template request.
