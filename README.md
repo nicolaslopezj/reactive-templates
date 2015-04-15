@@ -25,7 +25,7 @@ ReactiveTemplates.events('contactForm', {
 })
 ```
 
-Then, we will create out default template (this is not necesary, but in most cases the developer will use it).
+Then, we will create our default template (this is not necesary, but in most cases the developer will do it).
 
 ```html
 <template name="basicForm">
@@ -34,7 +34,9 @@ Then, we will create out default template (this is not necesary, but in most cas
 </template>
 ```
 
-Now, we are ready to ship out package. Maybe the developer using the package uses bootstrap, so he will override the template, without loosing the events we defined. So, he will create the template.
+Now, we are ready to ship out package. 
+
+Maybe the developer using the package uses bootstrap, so he will override the template, without loosing the events we defined. So, he will create the template.
 
 ```html
 <template name="bootstrapForm">
