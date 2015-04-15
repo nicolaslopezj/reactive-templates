@@ -13,7 +13,7 @@ Nothing explains better than an example, so before everything, here is an exampl
 
 Let's say we have a package that provides a contact form. We want include a basic template, but we wan't to make it easy to override without loosing helpers and events.
 
-The first thing we will do is to request a template and set events.
+The first thing we will do is to request a template and set events and some code where we use that future template.
 
 ```js
 ReactiveTemplates.request('contactForm', 'basicForm') // Basic form is the name of the default template we will create later
@@ -24,6 +24,11 @@ ReactiveTemplates.events('contactForm', {
     sendMessage(message);
   }
 })
+
+Router.route('/contact', function () {
+  this.layout(ReactiveTemplates.get('layout'));
+  this.render(ReactiveTemplates.get('contactForm'));
+});
 ```
 
 Then, we will create our default template (this is not necesary, but in most cases the developer will do it).
@@ -37,7 +42,7 @@ Then, we will create our default template (this is not necesary, but in most cas
 
 Now, we are ready to ship out package. 
 
-Maybe the developer using the package uses bootstrap, so he will override the template, without loosing the events we defined. So, he will create the template.
+Maybe the developer using the package uses bootstrap, so he will override the template.
 
 ```html
 <template name="bootstrapForm">
@@ -52,7 +57,7 @@ And assing it to the request.
 ReactiveTemplates.set('contactForm', 'bootstrapForm')
 ```
 
-Now when we call ```ReactiveTemplates.get('contactForm')``` it will return ```bootstrapForm``` instead of ```basicForm``` and the template ```bootstrapForm``` will have the events we defined to our ```basicForm``` template.
+Now the template its re-rendered automatically because of the reactivity and "bootstrapForm" has now the helpers and events we defined
 
 
 ## Getting Started
