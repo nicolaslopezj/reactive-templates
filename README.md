@@ -149,17 +149,17 @@ If you use a package like manuel:viewmodel that adds another properties to
 templates you can call a generic method to set that property.
 
 ```js
-ReactiveTemplates.assignProperty(property, identifier, data)
+ReactiveTemplates.assignProperty(property, identifier, argument)
 ```
 
 - ```property``` String. The name of the property, example "viewmodel".
 - ```identifier``` String. The identifier of the template request.
-- ```onDestroyed``` Function. onDestroyed hook.
+- ```argument``` The argument of the property.
 
 Calling this method will traduce in
 
 ```js
-Template.myTemplate.property(data);
+Template.myTemplate.property(argument);
 ```
 
 ## Helpers
