@@ -1,6 +1,7 @@
 ReactiveTemplates = {
   _templates: {},
   _deps: {},
+  _isRequestedDeps: {},
 };
 
 /**
@@ -11,6 +12,9 @@ ReactiveTemplates.request = function(identifier, defaultTemplate) {
   check(defaultTemplate, Match.Optional(String));
   this._deps[identifier] = new Tracker.Dependency;
   this._templates[identifier] = defaultTemplate;
+  if (_.has(this._isRequestedDeps, identifier)) {
+    this._isRequestedDeps[identifier].changed();
+  }
 }
 
 /**
@@ -29,4 +33,15 @@ ReactiveTemplates.set = function(identifier, templateName) {
   if (!_.has(this._deps, identifier)) throw 'Template "' + identifier + '" is not requested';
   this._templates[identifier] = templateName;
   this._deps[identifier].changed();
+}
+
+/**
+ * Returns if the template is requested
+ */
+ReactiveTemplates.isRequested = function(identifier) {
+  if (!_.has(this._isRequestedDeps, identifier)) {
+    this._isRequestedDeps[identifier] = new Tracker.Dependency;
+  }
+  this._isRequestedDeps[identifier].depend();
+  return _.has(this._deps, identifier);
 }
