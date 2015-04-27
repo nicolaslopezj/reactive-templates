@@ -1,7 +1,7 @@
 Package.describe({
   name: 'nicolaslopezj:reactive-templates',
   summary: 'Create templates that you can override in meteor',
-  version: '1.1.1',
+  version: '1.2.0',
   git: 'https://github.com/nicolaslopezj/reactive-templates'
 });
 

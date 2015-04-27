@@ -30,9 +30,13 @@ ReactiveTemplates.get = function(identifier) {
  * Assings a template to a template request
  */
 ReactiveTemplates.set = function(identifier, templateName) {
-  if (!_.has(this._deps, identifier)) throw 'Template "' + identifier + '" is not requested';
-  this._templates[identifier] = templateName;
-  this._deps[identifier].changed();
+  var self = this;
+  Tracker.autorun(function () {
+    if (self.isRequested(identifier)) {
+      self._templates[identifier] = templateName;
+      self._deps[identifier].changed();
+    }
+  });
 }
 
 /**
